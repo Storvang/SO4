@@ -59,7 +59,7 @@ Af = lambdify(x, str(integrate(function, x)))
 areal = Af(slut) - Af(start)
 
 #Fortæller arealet
-print(f"Intergralet af funktionen: f(x) = {function} er {areal}")
+print(f"Intergralet af funktionen: f(x) = {function} fra {start} til {slut} er {areal}")
 
 t1 = np.arange(-10.0, 10.0, 0.1)
 

@@ -4,8 +4,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class calculus:
-    def __init__(self):
-        self.x = x
+    def __init__(self, a, b, c, d, e, start, slut):
+        self.a = a
+        self.b = b
+        self.c = c
+        self.d = d
+        self.e = e
+        self.start = start
+        self.slut = slut
+
+    def function(self):
+        pass
 
     def diffrantialregning(self):
         pass
@@ -13,10 +22,32 @@ class calculus:
     def intergralregning(self):
         pass
 
-class vindue1:
-    def __init__(self):
+    def tangentFunction(self):
+        pass
+
+class plot:
+    def __init__(self, function, diffX, intX):
+        self.funcion = function
+        self.diffX = diffX
+        self.intX = intX
+
+    def setup(self):
+        pass
+
+    def plot(self):
         pass
 
 
-if __name__ == "__main__"
-    pass
+class window0:
+    def __init__(self, height, width, entry, label):
+        self.height = height
+        self.width = width
+        self.entry = entry
+        self.label = label
+
+    def drawWindow(self):
+        pass
+
+    def askingForVar(self):
+        pass
+
