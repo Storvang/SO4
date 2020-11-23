@@ -51,13 +51,13 @@ class window0:
             window = tk.Tk()
             window.title("SO4")
 
-            frame_1 = tk.Frame(window, height=300, width=300, bg="yellow")
+            frame_1 = tk.Frame(window, height=300, width=300)
 
             a = tk.Label(frame_1, text="Graf/frame 2")
 
             funktion_label = tk.Label(window, text="Intast funktion:")
             x_value_label = tk.Label(window, text="Intast x værdi:")
-            tekst = tk.Label(window, text="noget tekst")
+            tekst = tk.Label(window, text="differentialregning")
             funktion = tk.Entry(window)
             x_value = tk.Entry(window)
             btn1 = tk.Button(
@@ -81,15 +81,17 @@ class window0:
             window1 = tk.Tk()
             window1.title("SO4")
 
-            frame_1 = tk.Frame(window1, height=300, width=300, bg="yellow")
+            frame_1 = tk.Frame(window1, height=300, width=300)
 
             a = tk.Label(frame_1, text="Graf/frame 2")
 
             funktion_label = tk.Label(window1, text="Intast funktion:")
-            x_value_label = tk.Label(window1, text="Intast x værdi:")
-            tekst = tk.Label(window1, text="noget tekst")
+            a_value_label = tk.Label(window1, text="Intast a:")
+            b_value_label = tk.Label(window1, text="Intast b:")
+            tekst = tk.Label(window1, text="integralregning")
             funktion = tk.Entry(window1)
-            x_value = tk.Entry(window1)
+            a_value = tk.Entry(window1)
+            b_value = tk.Entry(window1)
             btn1 = tk.Button(
                 window1,
                 text="fuck me"
@@ -97,10 +99,12 @@ class window0:
 
             tekst.grid(column=1, row=0)
             funktion.grid(column=1, row=1)
-            x_value.grid(column=1, row=2)
-            btn1.grid(column=1, row=3)
+            a_value.grid(column=1, row=2)
+            b_value.grid(column=1, row=3)
+            btn1.grid(column=1, row=4)
             funktion_label.grid(column=0, row=1)
-            x_value_label.grid(column=0, row=2)
+            a_value_label.grid(column=0, row=2)
+            b_value_label.grid(column=0, row=3)
 
             a.grid()
             frame_1.grid(column=2, row=0, rowspan=4)
@@ -108,8 +112,40 @@ class window0:
             window1.mainloop()
 
         def thorbjørns_hygge():
+            window2 = tk.Tk()
+            window2.title("SO4")
+
+            frame_1 = tk.Frame(window2, height=300, width=300)
+
+            a = tk.Label(frame_1, text="Graf/frame 2")
+
+            funktion_label = tk.Label(window2, text="Intast funktion:")
+            a_value_label = tk.Label(window2, text="Intast:")
+
+            tekst = tk.Label(window2, text="Thorbjørns hygge program")
+            funktion = tk.Entry(window2)
+            a_value = tk.Entry(window2)
+
+            btn1 = tk.Button(
+                window2,
+                text="fuck me"
+            )
+
+            tekst.grid(column=1, row=0)
+            funktion.grid(column=1, row=1)
+            a_value.grid(column=1, row=2)
+
+            btn1.grid(column=1, row=4)
+            funktion_label.grid(column=0, row=1)
+            a_value_label.grid(column=0, row=2)
 
 
+            a.grid()
+            frame_1.grid(column=2, row=0, rowspan=4)
+
+            window2.mainloop()
+
+        thorbjørns_hygge()
     def askingForVar(self):
         pass
 
