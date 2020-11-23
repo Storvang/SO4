@@ -63,7 +63,7 @@ class window0:
         funktion = tk.Entry(frame_1)
         x_value = tk.Entry(frame_1)
         btn1 = tk.Button(
-            frame_1
+            frame_1,
             text="fuck me"
             )
 
