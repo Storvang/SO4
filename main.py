@@ -125,6 +125,6 @@ elif antal == 2:
     plot = plot(functions)
     plot.setup()
 
-
+    
     #print(functions)
 #... osv
