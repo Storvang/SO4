@@ -1,11 +1,14 @@
 from sympy import *
-import tkinter as tk
+import tkinter
 import numpy as np
 import matplotlib.pyplot as plt
 
+x, y, z, m = symbols("x y z m")
+
+init_printing(use_unicode=False, wrap_line=False)
 
 class calculus:
-    def __init__(self, a, b, c, d, e, start, slut):
+    def __init__(self, a, b, c, d, e, start, slut, tangentPunkt):
         self.a = a
         self.b = b
         self.c = c
@@ -13,27 +16,66 @@ class calculus:
         self.e = e
         self.start = start
         self.slut = slut
+        self.tangentPunkt = tangentPunkt
 
-    def function(self):
-        pass
+    def function(self, antal):
+        if antal == 1:
+            function = str(self.a*x + self.b)
+            f = lambdify(x, function)
+            diffX = self.diffrantialregning(function)
 
-    def diffrantialregning(self):
-        pass
+            #print(diffX)
 
-    def intergralregning(self):
-        pass
+            tf = self.tangentFunction(f, diffX)
+            intX = self.intergralregning(function)
 
-    def tangentFunction(self):
-        pass
+            areal = intX(self.slut) - intX(self.start)
+
+            return [f, diffX, tf, intX, areal]
+
+        elif antal == 2:
+            function = str(self.a*(x**2) + self.b*x + self.c)
+            f = lambdify(x, function)
+            diffX = self.diffrantialregning(function)
+
+            #print(diffX)
+
+            tf = self.tangentFunction(f, diffX)
+            intX = self.intergralregning(function)
+
+            areal = intX(self.slut) - intX(self.start)
+
+            return [f, diffX, tf, intX, areal]
+
+    def diffrantialregning(self, f):
+        return lambdify(x, str(diff(f)))
+
+    def tangentFunction(self, f, diffX):
+
+        healdning = diffX(self.tangentPunkt)
+
+        #print(healdning)
+
+        expr = healdning*self.tangentPunkt + m - f(self.tangentPunkt)
+
+        b1 = solve(expr, m)
+
+        #print(b1)
+
+        tf = lambdify(x, str(healdning*x + b1[0]))
+
+        return tf
+
+    def intergralregning(self, f):
+        return lambdify(x, str(integrate(f, x)))
 
 class plot:
-    def __init__(self, function, diffX, intX):
-        self.function = function
-        self.diffX = diffX
-        self.intX = intX
+    def __init__(self, functions):
+        self.functions = functions
+
 
     def setup(self):
-        pass
+        plt.figure()
 
     def plot(self):
         pass
@@ -46,133 +88,43 @@ class window0:
         self.entry = entry
         self.label = label
 
+    def drawWindow(self):
+        pass
 
-
-    def drawWindow():
-        def differentialregning():
-            window = tk.Tk()
-            window.title("SO4")
-
-            frame_1 = tk.Frame(window, height=300, width=300)
-
-            a = tk.Label(frame_1, text="Graf/frame 2")
-
-            funktion_label = tk.Label(window, text="Intast funktion:")
-            x_value_label = tk.Label(window, text="Intast x værdi:")
-            tekst = tk.Label(window, text="differentialregning")
-            funktion = tk.Entry(window)
-            x_value = tk.Entry(window)
-            btn1 = tk.Button(
-                window,
-                text="fuck me"
-                )
-
-            tekst.grid(column=1, row=0)
-            funktion.grid(column=1, row=1)
-            x_value.grid(column=1, row=2)
-            btn1.grid(column=1, row=3)
-            funktion_label.grid(column=0, row=1)
-            x_value_label.grid(column=0, row=2)
-
-            a.grid()
-            frame_1.grid(column=2, row=0, rowspan=4)
-
-            window.mainloop()
-
-        def integralregning():
-            window1 = tk.Tk()
-            window1.title("SO4")
-
-            frame_1 = tk.Frame(window1, height=300, width=300)
-
-            a = tk.Label(frame_1, text="Graf/frame 2")
-
-            funktion_label = tk.Label(window1, text="Intast funktion:")
-            a_value_label = tk.Label(window1, text="Intast a:")
-            b_value_label = tk.Label(window1, text="Intast b:")
-            tekst = tk.Label(window1, text="integralregning")
-            funktion = tk.Entry(window1)
-            a_value = tk.Entry(window1)
-            b_value = tk.Entry(window1)
-            btn1 = tk.Button(
-                window1,
-                text="fuck me"
-            )
-
-            tekst.grid(column=1, row=0)
-            funktion.grid(column=1, row=1)
-            a_value.grid(column=1, row=2)
-            b_value.grid(column=1, row=3)
-            btn1.grid(column=1, row=4)
-            funktion_label.grid(column=0, row=1)
-            a_value_label.grid(column=0, row=2)
-            b_value_label.grid(column=0, row=3)
-
-            a.grid()
-            frame_1.grid(column=2, row=0, rowspan=4)
-
-            window1.mainloop()
-
-        def thorbjørns_hygge():
-            window2 = tk.Tk()
-            window2.title("SO4")
-
-            frame_1 = tk.Frame(window2, height=300, width=300)
-
-            a = tk.Label(frame_1, text="Graf/frame 2")
-
-            funktion_label = tk.Label(window2, text="Intast funktion:")
-            a_value_label = tk.Label(window2, text="Intast:")
-
-            tekst = tk.Label(window2, text="Thorbjørns hygge program")
-            funktion = tk.Entry(window2)
-            a_value = tk.Entry(window2)
-
-            btn1 = tk.Button(
-                window2,
-                text="fuck me"
-            )
-
-            tekst.grid(column=1, row=0)
-            funktion.grid(column=1, row=1)
-            a_value.grid(column=1, row=2)
-
-            btn1.grid(column=1, row=4)
-            funktion_label.grid(column=0, row=1)
-            a_value_label.grid(column=0, row=2)
-
-
-            a.grid()
-            frame_1.grid(column=2, row=0, rowspan=4)
-
-            window2.mainloop()
-
-        def drawmenu():
-            window = tk.Tk()
-            window.title("bob")
-
-            frame = tk.Frame(window)
-            btnbob = tk.Button(frame, text="Differentialregning", command=differentialregning)
-            btnpeter = tk.Button(frame, text="Integralregning", command=integralregning)
-            btnib = tk.Button(frame, text="Thorbjørns_hygge", command=thorbjørns_hygge)
-
-
-            btnbob.grid()
-            btnpeter.grid()
-            btnib.grid()
-            frame.grid()
-            window.mainloop()
-        drawmenu()
-    drawWindow()
     def askingForVar(self):
         pass
 
-window0()
-#class menu:
 
 
- #   drawmenu()
+#Kommer ind i gui:
+antal = int(input("Hvor mange kompunenter er det i funktion: "))
 
-#window = window0(500, 500, 0, 0)
 
-#menu()
+if antal == 1:
+    a = int(input("Hvad er a værdien: "))
+    b = int(input("Hvad er b værdien: "))
+    start = float(input("Hvor skal integralet starte: "))
+    slut = float(input("Hvor skal integralet slut: "))
+    tangentPunkt = int(input("Hvor skal tangenten være: "))
+    calc = calculus(a, b, 0, 0, 0, start, slut, tangentPunkt)
+    functions = calc.function(antal)
+    plot = plot(functions)
+    plot.setup()
+
+    #print(functions)
+
+elif antal == 2:
+    a = int(input("Hvad er a værdien: "))
+    b = int(input("Hvad er b værdien: "))
+    c = int(input("Hvad er c værdien: "))
+    start = float(input("Hvor skal integralet starte: "))
+    slut = float(input("Hvor skal integralet slut: "))
+    tangentPunkt = int(input("Hvor skal tangenten være: "))
+    calc = calculus(a, b, c, 0, 0, start, slut, tangentPunkt)
+    functions = calc.function(antal)
+    plot = plot(functions)
+    plot.setup()
+
+    
+    #print(functions)
+#... osv
