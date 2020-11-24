@@ -3,6 +3,7 @@ import tkinter as tk
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 class calculus:
     def __init__(self, a, b, c, d, e, start, slut):
         self.a = a
@@ -46,7 +47,8 @@ class window0:
         self.label = label
 
 
-    def drawWindow(self):
+
+    def drawWindow():
         def differentialregning():
             window = tk.Tk()
             window.title("SO4")
@@ -145,9 +147,32 @@ class window0:
 
             window2.mainloop()
 
-        thorbjørns_hygge()
+        def drawmenu():
+            window = tk.Tk()
+            window.title("bob")
+
+            frame = tk.Frame(window)
+            btnbob = tk.Button(frame, text="Differentialregning", command=differentialregning)
+            btnpeter = tk.Button(frame, text="Integralregning", command=integralregning)
+            btnib = tk.Button(frame, text="Thorbjørns_hygge", command=thorbjørns_hygge)
+
+
+            btnbob.grid()
+            btnpeter.grid()
+            btnib.grid()
+            frame.grid()
+            window.mainloop()
+        drawmenu()
+    drawWindow()
     def askingForVar(self):
         pass
 
-window = window0(500, 500, 0, 0)
-window.drawWindow()
+window0()
+#class menu:
+
+
+ #   drawmenu()
+
+#window = window0(500, 500, 0, 0)
+
+#menu()
