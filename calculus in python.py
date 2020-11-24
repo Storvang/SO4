@@ -3,8 +3,10 @@ import pylab as lab
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 x, y, z, m = symbols("x y z m")
 
+#O.o
 init_printing(use_unicode=False, wrap_line=False)
 
 #Funktion input
@@ -20,6 +22,7 @@ start = float(input("Hvor ville du have intergralet til at starte: "))
 slut = float(input("Hvor ville du have intergralet til at slutte: "))
 
 #Funktion opstillet sådan python kan forstå det
+#lamdify oversætter string til funktion
 f = lambdify(x, function)
 
 #Hældningkoeficient
