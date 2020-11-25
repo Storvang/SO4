@@ -87,10 +87,9 @@ class window0:
         self.width = width
         self.entry = entry
         self.label = label
+        self.funktioner = ["1 grads", "2 grads", "3 grads", "4 grads", "5 grads", "6 grads", "sinus", "cosinus", "tangent", "potens"]
 
-
-
-    def drawWindow():
+    def drawWindow(self):
         def differentialregning():
             window = tk.Tk()
             window.title("SO4")
@@ -99,20 +98,30 @@ class window0:
 
             a = tk.Label(frame_1, text="Graf/frame 2")
 
-            funktion_label = tk.Label(window, text="Intast funktion:")
+            funktion_label = tk.Label(window, text="vælg funktion:")
             x_value_label = tk.Label(window, text="Intast x værdi:")
             tekst = tk.Label(window, text="differentialregning")
-            funktion = tk.Entry(window)
             x_value = tk.Entry(window)
             btn1 = tk.Button(
                 window,
-                text="fuck me"
+                text="beregn"
                 )
 
+            quit_btn = tk.Button(
+                window,
+                command=lambda: window.destroy(),
+                text="menu"
+            )
+
+            variable = tk.StringVar(window)
+            variable.set("vælg funktion")
+            funktion_box = tk.OptionMenu(window, variable, *self.funktioner)
+
             tekst.grid(column=1, row=0)
-            funktion.grid(column=1, row=1)
+            funktion_box.grid(column=1, row=1)
             x_value.grid(column=1, row=2)
             btn1.grid(column=1, row=3)
+            quit_btn.grid(column=0, row=3)
             funktion_label.grid(column=0, row=1)
             x_value_label.grid(column=0, row=2)
 
@@ -129,23 +138,33 @@ class window0:
 
             a = tk.Label(frame_1, text="Graf/frame 2")
 
-            funktion_label = tk.Label(window1, text="Intast funktion:")
+            funktion_label = tk.Label(window1, text="vælg funktion:")
             a_value_label = tk.Label(window1, text="Intast a:")
             b_value_label = tk.Label(window1, text="Intast b:")
             tekst = tk.Label(window1, text="integralregning")
-            funktion = tk.Entry(window1)
             a_value = tk.Entry(window1)
             b_value = tk.Entry(window1)
             btn1 = tk.Button(
                 window1,
-                text="fuck me"
+                text="beregn"
             )
 
+            quit_btn = tk.Button(
+                window1,
+                command=lambda: window1.destroy(),
+                text="menu"
+            )
+
+            variable = tk.StringVar(window1)
+            variable.set("vælg funktion")
+            funktion_box = tk.OptionMenu(window1, variable, *self.funktioner)
+
             tekst.grid(column=1, row=0)
-            funktion.grid(column=1, row=1)
+            funktion_box.grid(column=1, row=1)
             a_value.grid(column=1, row=2)
             b_value.grid(column=1, row=3)
             btn1.grid(column=1, row=4)
+            quit_btn.grid(column=0, row=4)
             funktion_label.grid(column=0, row=1)
             a_value_label.grid(column=0, row=2)
             b_value_label.grid(column=0, row=3)
@@ -163,23 +182,34 @@ class window0:
 
             a = tk.Label(frame_1, text="Graf/frame 2")
 
-            funktion_label = tk.Label(window2, text="Intast funktion:")
+            funktion_label = tk.Label(window2, text="vælg funktion:")
             a_value_label = tk.Label(window2, text="Intast:")
 
             tekst = tk.Label(window2, text="Thorbjørns hygge program")
-            funktion = tk.Entry(window2)
+
             a_value = tk.Entry(window2)
 
             btn1 = tk.Button(
                 window2,
-                text="fuck me"
+                text="beregn"
             )
 
+            quit_btn = tk.Button(
+                window2,
+                command=lambda: window2.destroy(),
+                text="menu"
+            )
+
+            variable = tk.StringVar(window2)
+            variable.set("vælg funktion")
+            funktion_box = tk.OptionMenu(window2, variable, *self.funktioner)
+
             tekst.grid(column=1, row=0)
-            funktion.grid(column=1, row=1)
+            funktion_box.grid(column=1, row=1)
             a_value.grid(column=1, row=2)
 
             btn1.grid(column=1, row=4)
+            quit_btn.grid(column=0, row=4)
             funktion_label.grid(column=0, row=1)
             a_value_label.grid(column=0, row=2)
 
@@ -191,7 +221,7 @@ class window0:
 
         def drawmenu():
             window = tk.Tk()
-            window.title("bob")
+            window.title("main")
 
             frame = tk.Frame(window)
             btnbob = tk.Button(frame, text="Differentialregning", command=differentialregning)
@@ -205,9 +235,12 @@ class window0:
             frame.pack()
             window.mainloop()
         drawmenu()
-    drawWindow()
+
     def askingForVar(self):
         pass
+
+window = window0(500, 500, 0, 0)
+window.drawWindow()
 
 #Kommer ind i gui:
 antal = int(input("Hvor mange kompunenter er det i funktion: "))
@@ -237,6 +270,4 @@ elif antal == 2:
     plot = plot(functions)
     plot.setup()
 
-    
-    #print(functions)
-#... osv
+
