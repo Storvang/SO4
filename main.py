@@ -90,7 +90,7 @@ class window0:
 
 
 
-    def drawWindow():
+    def drawWindow(self):
         def differentialregning():
             window = tk.Tk()
             window.title("SO4")
