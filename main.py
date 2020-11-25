@@ -199,10 +199,10 @@ class window0:
             btnib = tk.Button(frame, text="Thorbjørns_hygge", command=thorbjørns_hygge)
 
 
-            btnbob.grid()
-            btnpeter.grid()
-            btnib.grid()
-            frame.grid()
+            btnbob.pack()
+            btnpeter.pack()
+            btnib.pack()
+            frame.pack()
             window.mainloop()
         drawmenu()
     drawWindow()
