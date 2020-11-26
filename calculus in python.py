@@ -2,6 +2,7 @@ from sympy import *
 import pylab as lab
 import numpy as np
 import matplotlib.pyplot as plt
+from tkinter import *
 
 
 x, y, z, m = symbols("x y z m")

@@ -2,6 +2,7 @@ from sympy import *
 import tkinter as tk
 import numpy as np
 import matplotlib.pyplot as plt
+from tkinter import *
 
 x, y, z, m = symbols("x y z m")
 
@@ -109,7 +110,7 @@ class window0:
 
             quit_btn = tk.Button(
                 window,
-                command=lambda: window.destroy(),
+                command=lambda: [window.destroy(), drawmenu()],
                 text="menu"
             )
 
@@ -151,7 +152,7 @@ class window0:
 
             quit_btn = tk.Button(
                 window1,
-                command=lambda: window1.destroy(),
+                command=lambda: [window1.destroy(), drawmenu()],
                 text="menu"
             )
 
@@ -175,8 +176,13 @@ class window0:
             window1.mainloop()
 
         def thorbjørns_hygge():
+
             window2 = tk.Tk()
             window2.title("SO4")
+
+            def hjem():
+                window2.destroy()
+                window0()
 
             frame_1 = tk.Frame(window2, height=300, width=300)
 
@@ -185,6 +191,7 @@ class window0:
             funktion_label = tk.Label(window2, text="vælg funktion:")
             a_value_label = tk.Label(window2, text="Intast:")
 
+            Hjem= tk.Button(window2, text="hjem", command=lambda: [window2.destroy(), drawmenu()])
             tekst = tk.Label(window2, text="Thorbjørns hygge program")
 
             a_value = tk.Entry(window2)
@@ -196,7 +203,7 @@ class window0:
 
             quit_btn = tk.Button(
                 window2,
-                command=lambda: window2.destroy(),
+                command=lambda: [window2.destroy(), drawmenu()],
                 text="menu"
             )
 
@@ -206,6 +213,8 @@ class window0:
 
             tekst.grid(column=1, row=0)
             funktion_box.grid(column=1, row=1)
+            Hjem.grid(column=1, row=0)
+            #tekst.grid(column=1, row=0)
             a_value.grid(column=1, row=2)
 
             btn1.grid(column=1, row=4)
@@ -221,12 +230,34 @@ class window0:
 
         def drawmenu():
             window = tk.Tk()
-            window.title("main")
+            window.title("menu")
+            window.geometry("2500x3000")
+            window.configure(bg='blue')
+            C = Canvas(window, bg="red", height=25, width=30)
+            filename = PhotoImage(file="Test2.png")
+            #image = Image.open(filename)
+
+            #image = image.resize((800, 800), Image.ANTIALIAS) ## The (250, 250) is (height, width)
+
+            background_label = Label(window, image=filename)
+            background_label.place(x=1, y=1, relwidth=1, relheight=1)
+
+
+
+            def test():
+                differentialregning()
+                window.destroy()
+
+
+            def bob():
+                window.destroy()
+
 
             frame = tk.Frame(window)
-            btnbob = tk.Button(frame, text="Differentialregning", command=differentialregning)
-            btnpeter = tk.Button(frame, text="Integralregning", command=integralregning)
-            btnib = tk.Button(frame, text="Thorbjørns_hygge", command=thorbjørns_hygge)
+            btnbob = tk.Button(frame, text="Differentialregning", command=lambda: [window.destroy(),differentialregning()])
+            btnpeter = tk.Button(frame, text="Integralregning", command= lambda: [window.destroy(),integralregning()])
+            btnib = tk.Button(frame, text="Thorbjørns_hygge", command=lambda: [window.destroy(),thorbjørns_hygge()])
+            #Hjembu=tk.Button(Text="Hjem", command=)
 
 
             btnbob.pack()
@@ -234,6 +265,7 @@ class window0:
             btnib.pack()
             frame.pack()
             window.mainloop()
+            #C.pack()
         drawmenu()
 
     def askingForVar(self):
