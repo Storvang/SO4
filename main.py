@@ -97,12 +97,13 @@ class window0:
 
             frame_1 = tk.Frame(window, height=300, width=300)
 
-            a = tk.Label(frame_1, text="Graf/frame 2")
+            frame2_label = tk.Label(frame_1, text="Graf/frame 2")
 
             funktion_label = tk.Label(window, text="vælg funktion:")
             x_value_label = tk.Label(window, text="Intast x værdi:")
             tekst = tk.Label(window, text="differentialregning")
             x_value = tk.Entry(window)
+
             btn1 = tk.Button(
                 window,
                 text="beregn"
@@ -114,20 +115,35 @@ class window0:
                 text="menu"
             )
 
+            def check(var):
+                if var == "1 grads":
+                    a_entry = tk.Entry(window)
+                    a_label = tk.Label(window, text=x)
+                    b_entry = tk.Entry(window)
+
+                    a_entry.grid(column=0, row=2, sticky=tk.E)
+                    a_label.grid(column=1, row=2, sticky=tk.W)
+                    b_entry.grid(column=0, row=3, sticky=tk.E)
+                else:
+                    pass
+
             variable = tk.StringVar(window)
             variable.set("vælg funktion")
-            funktion_box = tk.OptionMenu(window, variable, *self.funktioner)
+            funktion_box = tk.OptionMenu(window, variable, *self.funktioner, command=lambda: [check(variable.get())])
+
+
+
 
             tekst.grid(column=1, row=0)
             funktion_box.grid(column=1, row=1)
-            x_value.grid(column=1, row=2)
-            btn1.grid(column=1, row=3)
-            quit_btn.grid(column=0, row=3)
+            x_value.grid(column=1, row=100)
+            btn1.grid(column=1, row=101)
+            quit_btn.grid(column=1, row=102)
             funktion_label.grid(column=0, row=1)
-            x_value_label.grid(column=0, row=2)
+            x_value_label.grid(column=1, row=103)
 
-            a.grid()
-            frame_1.grid(column=2, row=0, rowspan=4)
+            frame2_label.grid()
+            frame_1.grid(column=3, row=1, rowspan=100)
 
             window.mainloop()
 
@@ -137,7 +153,7 @@ class window0:
 
             frame_1 = tk.Frame(window1, height=300, width=300)
 
-            a = tk.Label(frame_1, text="Graf/frame 2")
+            frame2_label = tk.Label(frame_1, text="Graf/frame 2")
 
             funktion_label = tk.Label(window1, text="vælg funktion:")
             a_value_label = tk.Label(window1, text="Intast a:")
@@ -170,7 +186,7 @@ class window0:
             a_value_label.grid(column=0, row=2)
             b_value_label.grid(column=0, row=3)
 
-            a.grid()
+            frame2_label.grid()
             frame_1.grid(column=2, row=0, rowspan=4)
 
             window1.mainloop()
@@ -186,7 +202,7 @@ class window0:
 
             frame_1 = tk.Frame(window2, height=300, width=300)
 
-            a = tk.Label(frame_1, text="Graf/frame 2")
+            frame2_label = tk.Label(frame_1, text="Graf/frame 2")
 
             funktion_label = tk.Label(window2, text="vælg funktion:")
             a_value_label = tk.Label(window2, text="Intast:")
@@ -216,14 +232,13 @@ class window0:
             Hjem.grid(column=1, row=0)
             #tekst.grid(column=1, row=0)
             a_value.grid(column=1, row=2)
-
             btn1.grid(column=1, row=4)
             quit_btn.grid(column=0, row=4)
             funktion_label.grid(column=0, row=1)
             a_value_label.grid(column=0, row=2)
 
 
-            a.grid()
+            frame2_label.grid()
             frame_1.grid(column=2, row=0, rowspan=4)
 
             window2.mainloop()
