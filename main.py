@@ -247,14 +247,14 @@ class window0:
             window = tk.Tk()
             window.title("menu")
             window.geometry("2500x3000")
-            window.configure(bg='blue')
-            C = Canvas(window, bg="red", height=25, width=30)
+            window.configure(bg='white')
+            C = Canvas(window, bg="white", height=25, width=30)
             filename = PhotoImage(file="Test2.png")
             #image = Image.open(filename)
 
             #image = image.resize((800, 800), Image.ANTIALIAS) ## The (250, 250) is (height, width)
 
-            background_label = Label(window, image=filename)
+            background_label = Label(window, image=filename, bg="white")
             background_label.place(x=1, y=1, relwidth=1, relheight=1)
 
 
@@ -268,7 +268,7 @@ class window0:
                 window.destroy()
 
 
-            frame = tk.Frame(window)
+            frame = tk.Frame(window, bg="white")
             btnbob = tk.Button(frame, text="Differentialregning", command=lambda: [window.destroy(),differentialregning()])
             btnpeter = tk.Button(frame, text="Integralregning", command= lambda: [window.destroy(),integralregning()])
             btnib = tk.Button(frame, text="Thorbjørns_hygge", command=lambda: [window.destroy(),thorbjørns_hygge()])
