@@ -115,23 +115,14 @@ class window0:
                 text="menu"
             )
 
-            def check(var):
-                if var == "1 grads":
-                    a_entry = tk.Entry(window)
-                    a_label = tk.Label(window, text=x)
-                    b_entry = tk.Entry(window)
 
-                    a_entry.grid(column=0, row=2, sticky=tk.E)
-                    a_label.grid(column=1, row=2, sticky=tk.W)
-                    b_entry.grid(column=0, row=3, sticky=tk.E)
-                else:
-                    pass
 
             variable = tk.StringVar(window)
             variable.set("vælg funktion")
-            funktion_box = tk.OptionMenu(window, variable, *self.funktioner, command=lambda: [check(variable.get())])
-
-
+            #print(variable)
+            funktion_box = tk.OptionMenu(window, variable, *self.funktioner)
+            btn = tk.Button(window, text="vælg", command=lambda: check1(variable.get()))
+            btn.grid()
 
 
             tekst.grid(column=1, row=0)
@@ -230,7 +221,6 @@ class window0:
             tekst.grid(column=1, row=0)
             funktion_box.grid(column=1, row=1)
             Hjem.grid(column=1, row=0)
-            #tekst.grid(column=1, row=0)
             a_value.grid(column=1, row=2)
             btn1.grid(column=1, row=4)
             quit_btn.grid(column=0, row=4)
@@ -318,3 +308,162 @@ elif antal == 2:
     plot.setup()
 
 
+
+
+
+
+def check1(var):
+    print(var)
+    if var == self.funktioner[0]:
+        a_entry = tk.Entry(master...)
+        a_label = tk.Label(master..., text="x")
+        b_entry = tk.Entry(master...)
+
+        a_entry.grid(column=0, row=2, sticky=tk.E)
+        a_label.grid(column=1, row=2, sticky=tk.W)
+        b_entry.grid(column=0, row=3, sticky=tk.E)
+
+
+    elif var == self.funktioner[1]:
+        a_entry = tk.Entry(master...)
+        a_label = tk.Label(master..., text="x^2")
+        b_entry = tk.Entry(master...)
+        b_label = tk.Label(master..., text="x")
+        c_entry = tk.Entry(master...)
+
+        a_entry.grid(column=0, row=2, sticky=tk.E)
+        a_label.grid(column=1, row=2, sticky=tk.W)
+        b_entry.grid(column=0, row=3, sticky=tk.E)
+        b_label.grid(column=1, row=3, sticky=tk.W)
+        c_entry.grid(column=0, row=4, sticky=tk.E)
+
+    elif var == self.funktioner[2]:
+        a_entry = tk.Entry(master...)
+        a_label = tk.Label(master..., text="x^3")
+        b_entry = tk.Entry(master...)
+        b_label = tk.Label(master..., text="x^2")
+        c_entry = tk.Entry(master...)
+        c_label = tk.Label(master..., text="x")
+        d_entry = tk.Entry(master...)
+
+        a_entry.grid(column=0, row=2, sticky=tk.E)
+        a_label.grid(column=1, row=2, sticky=tk.W)
+        b_entry.grid(column=0, row=3, sticky=tk.E)
+        b_label.grid(column=1, row=3, sticky=tk.W)
+        c_entry.grid(column=0, row=4, sticky=tk.E)
+        c_label.grid(column=1, row=4, sticky=tk.W)
+        d_entry.grid(column=0, row=5, sticky=tk.E)
+
+    elif var == self.funktioner[3]:
+        a_entry = tk.Entry(master...)
+        a_label = tk.Label(master..., text="x^4")
+        b_entry = tk.Entry(master...)
+        b_label = tk.Label(master..., text="x^3")
+        c_entry = tk.Entry(master...)
+        c_label = tk.Label(master..., text="x^2")
+        d_entry = tk.Entry(master...)
+        d_label = tk.Label(master..., text="x")
+        e_entry = tk.Entry(master...)
+
+        a_entry.grid(column=0, row=2, sticky=tk.E)
+        a_label.grid(column=1, row=2, sticky=tk.W)
+        b_entry.grid(column=0, row=3, sticky=tk.E)
+        b_label.grid(column=1, row=3, sticky=tk.W)
+        c_entry.grid(column=0, row=4, sticky=tk.E)
+        c_label.grid(column=1, row=4, sticky=tk.W)
+        d_entry.grid(column=0, row=5, sticky=tk.E)
+        d_label.grid(column=1, row=5, sticky=tk.W)
+        e_entry.grid(column=0, row=6, sticky=tk.E)
+
+    elif var == self.funktioner[4]:
+        a_entry = tk.Entry(master...)
+        a_label = tk.Label(master..., text="x^5")
+        b_entry = tk.Entry(master...)
+        b_label = tk.Label(master..., text="x^4")
+        c_entry = tk.Entry(master...)
+        c_label = tk.Label(master..., text="x^3")
+        d_entry = tk.Entry(master...)
+        d_label = tk.Label(master..., text="x^2")
+        e_entry = tk.Entry(master...)
+        e_label = tk.Label(master..., text="x")
+        f_entry = tk.Entry(master...)
+
+        a_entry.grid(column=0, row=2, sticky=tk.E)
+        a_label.grid(column=1, row=2, sticky=tk.W)
+        b_entry.grid(column=0, row=3, sticky=tk.E)
+        b_label.grid(column=1, row=3, sticky=tk.W)
+        c_entry.grid(column=0, row=4, sticky=tk.E)
+        c_label.grid(column=1, row=4, sticky=tk.W)
+        d_entry.grid(column=0, row=5, sticky=tk.E)
+        d_label.grid(column=1, row=5, sticky=tk.W)
+        e_entry.grid(column=0, row=6, sticky=tk.E)
+        e_label.grid(column=1, row=6, sticky=tk.W)
+        f_entry.grid(column=0, row=7, sticky=tk.E)
+
+    elif var == self.funktioner[5]:
+        a_entry = tk.Entry(master...)
+        a_label = tk.Label(master..., text="x^6")
+        b_entry = tk.Entry(master...)
+        b_label = tk.Label(master..., text="x^5")
+        c_entry = tk.Entry(master...)
+        c_label = tk.Label(master..., text="x^4")
+        d_entry = tk.Entry(master...)
+        d_label = tk.Label(master..., text="x^3")
+        e_entry = tk.Entry(master...)
+        e_label = tk.Label(master..., text="x^2")
+        f_entry = tk.Entry(master...)
+        f_label = tk.Label(master..., text="x")
+        g_entry = tk.Entry(window)
+
+        a_entry.grid(column=0, row=2, sticky=tk.E)
+        a_label.grid(column=1, row=2, sticky=tk.W)
+        b_entry.grid(column=0, row=3, sticky=tk.E)
+        b_label.grid(column=1, row=3, sticky=tk.W)
+        c_entry.grid(column=0, row=4, sticky=tk.E)
+        c_label.grid(column=1, row=4, sticky=tk.W)
+        d_entry.grid(column=0, row=5, sticky=tk.E)
+        d_label.grid(column=1, row=5, sticky=tk.W)
+        e_entry.grid(column=0, row=6, sticky=tk.E)
+        e_label.grid(column=1, row=6, sticky=tk.W)
+        f_entry.grid(column=0, row=7, sticky=tk.E)
+        f_label.grid(column=1, row=7, sticky=tk.W)
+        g_entry.grid(column=0, row=8, sticky=tk.E)
+
+    elif var == self.funktioner[6]:
+        a_entry = tk.Entry(master...)
+        a_label = tk.Label(master..., text="x")
+        b_entry = tk.Entry(master...)
+
+        a_entry.grid(column=0, row=2, sticky=tk.E)
+        a_label.grid(column=1, row=2, sticky=tk.W)
+        b_entry.grid(column=0, row=3, sticky=tk.E)
+
+    elif var == self.funktioner[7]:
+        a_entry = tk.Entry(master...)
+        a_label = tk.Label(master..., text="x")
+        b_entry = tk.Entry(master...)
+
+        a_entry.grid(column=0, row=2, sticky=tk.E)
+        a_label.grid(column=1, row=2, sticky=tk.W)
+        b_entry.grid(column=0, row=3, sticky=tk.E)
+
+    elif var == self.funktioner[8]:
+        a_entry = tk.Entry(master...)
+        a_label = tk.Label(master..., text="x")
+        b_entry = tk.Entry(master...)
+
+        a_entry.grid(column=0, row=2, sticky=tk.E)
+        a_label.grid(column=1, row=2, sticky=tk.W)
+        b_entry.grid(column=0, row=3, sticky=tk.E)
+
+    elif var == self.funktioner[9]:
+        a_entry = tk.Entry(master...)
+        a_label = tk.Label(master..., text="^x")
+        b_entry = tk.Entry(master...)
+
+        a_entry.grid(column=0, row=2, sticky=tk.E)
+        a_label.grid(column=1, row=2, sticky=tk.W)
+        b_entry.grid(column=0, row=3, sticky=tk.E)
+
+    else:
+        pass
