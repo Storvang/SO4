@@ -9,17 +9,21 @@ x, y, z, m = symbols("x y z m")
 init_printing(use_unicode=False, wrap_line=False)
 
 class calculus:
-    def __init__(self, a, b, c, d, e, start, slut, tangentPunkt):
+    def __init__(self, a, b, c, d, e, f, g, start, slut, tangentPunkt, typeFunc):
         self.a = a
         self.b = b
         self.c = c
         self.d = d
         self.e = e
+        self.f = f
+        self.g = g
         self.start = start
         self.slut = slut
         self.tangentPunkt = tangentPunkt
+        self.typeFunc = typeFunc
 
     def function(self, antal):
+        #1 grads
         if antal == 1:
             function = str(self.a*x + self.b)
             f = lambdify(x, function)
@@ -33,7 +37,7 @@ class calculus:
             areal = intX(self.slut) - intX(self.start)
 
             return [f, diffX, tf, intX, areal]
-
+        #2 grads
         elif antal == 2:
             function = str(self.a*(x**2) + self.b*x + self.c)
             f = lambdify(x, function)
@@ -45,9 +49,119 @@ class calculus:
             intX = self.intergralregning(function)
 
             areal = intX(self.slut) - intX(self.start)
-
             return [f, diffX, tf, intX, areal]
 
+        #3 grads
+        elif antal == 3:
+            function = str(self.a*(x**3) + self.b*(x**2) + self.c*x + self.d)
+            f = lambdify(x, function)
+            diffX = self.diffrantialregning(function)
+
+            #print(diffX)
+
+            tf = self.tangentFunction(f, diffX)
+            intX = self.intergralregning(function)
+
+            areal = intX(self.slut) - intX(self.start)
+            return [f, diffX, tf, intX, areal]
+
+        #4 grads
+        elif antal == 4:
+            function = str(self.a*(x**4) + self.b*(x**3) + self.c*(x**2) + self.d*x + self.e)
+            f = lambdify(x, function)
+            diffX = self.diffrantialregning(function)
+
+            #print(diffX)
+
+            tf = self.tangentFunction(f, diffX)
+            intX = self.intergralregning(function)
+
+            areal = intX(self.slut) - intX(self.start)
+            return [f, diffX, tf, intX, areal]
+
+        #5 grads
+        elif antal == 5:
+            function = str(self.a*(x**5) + self.b*(x**4) + self.c*(x**3) + self.d*(x**2) + self.e*x + self.f)
+            f = lambdify(x, function)
+            diffX = self.diffrantialregning(function)
+
+            #print(diffX)
+
+            tf = self.tangentFunction(f, diffX)
+            intX = self.intergralregning(function)
+
+            areal = intX(self.slut) - intX(self.start)
+            return [f, diffX, tf, intX, areal]
+
+        #6 grads
+        elif antal == 6:
+            function = str(self.a*(x**6) + self.b*(x**5) + self.c*(x**4) + self.d*(x**3) + self.e*(x**2) + self.f*x + self.g)
+            f = lambdify(x, function)
+            diffX = self.diffrantialregning(function)
+
+            #print(diffX)
+
+            tf = self.tangentFunction(f, diffX)
+            intX = self.intergralregning(function)
+
+            areal = intX(self.slut) - intX(self.start)
+            return [f, diffX, tf, intX, areal]
+
+        #cos
+        elif antal == 7:
+            function = str(cos(self.a*x))
+            f = lambdify(x, function)
+            diffX = self.diffrantialregning(function)
+
+            #print(diffX)
+
+            tf = self.tangentFunction(f, diffX)
+            intX = self.intergralregning(function)
+
+            areal = intX(self.slut) - intX(self.start)
+            return [f, diffX, tf, intX, areal]
+
+        #sin
+        elif antal == 8:
+            function = str(sin(self.a*x))
+            f = lambdify(x, function)
+            diffX = self.diffrantialregning(function)
+
+            #print(diffX)
+
+            tf = self.tangentFunction(f, diffX)
+            intX = self.intergralregning(function)
+
+            areal = intX(self.slut) - intX(self.start)
+            return [f, diffX, tf, intX, areal]
+
+        #tan
+        elif antal == 9:
+            function = str(tan(self.a*x))
+            f = lambdify(x, function)
+            diffX = self.diffrantialregning(function)
+
+            #print(diffX)
+
+            tf = self.tangentFunction(f, diffX)
+            intX = self.intergralregning(function)
+
+            areal = intX(self.slut) - intX(self.start)
+            return [f, diffX, tf, intX, areal]
+
+        #potens
+        elif antal == 10:
+            function = str(self.b*self.a**x)
+            f = lambdify(x, function)
+            diffX = self.diffrantialregning(function)
+
+            #print(diffX)
+
+            tf = self.tangentFunction(f, diffX)
+            intX = self.intergralregning(function)
+
+            areal = intX(self.slut) - intX(self.start)
+            return [f, diffX, tf, intX, areal]
     #[f, diffX, tf, intX, areal, self.start, self.slut]
 
     def diffrantialregning(self, f):
@@ -75,7 +189,6 @@ class calculus:
 class plot:
     def __init__(self, functions):
         self.functions = functions
-
 
     def plotDiff(self):
 
