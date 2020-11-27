@@ -48,6 +48,8 @@ class calculus:
 
             return [f, diffX, tf, intX, areal]
 
+    #[f, diffX, tf, intX, areal, self.start, self.slut]
+
     def diffrantialregning(self, f):
         return lambdify(x, str(diff(f)))
 
@@ -75,12 +77,102 @@ class plot:
         self.functions = functions
 
 
-    def setup(self):
-        plt.figure()
+    def plotDiff(self):
 
-    def plot(self):
+        # Idk
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+
+        ax1 = fig.add_subplot()
+
+        # Lim som er fra og til i x og y akserne
+        plt.xlim((-10, 10))
+        plt.ylim((-10, 10))
+
+        # Hvad x og y akserne hedder
+        plt.ylabel("$y$")
+        plt.xlabel("$x$")
+
+        # x og y akse i midten af koordinatsystemet
+        left, right = ax.get_xlim()
+        low, high = ax.get_ylim()
+        plt.arrow(left, 0, right - left, 0, length_includes_head=True, head_width=0.15)
+        plt.arrow(0, low, 0, high - low, length_includes_head=True, head_width=0.15)
+
+        # Firkanter :D !!!
+        plt.grid(True)
+
+        t1 = np.arange(-10.0, 10.0, 0.1)
+        plt.plot(t1, functions[0](t1))
+        plt.plot(t1, functions[2](t1))
+        plt.show()
+
+    def plotInt(self):
+
+        # Idk
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+
+        ax1 = fig.add_subplot()
+
+        # Lim som er fra og til i x og y akserne
+        plt.xlim((-10, 10))
+        plt.ylim((-10, 10))
+
+        # Hvad x og y akserne hedder
+        plt.ylabel("$y$")
+        plt.xlabel("$x$")
+
+        # x og y akse i midten af koordinatsystemet
+        left, right = ax.get_xlim()
+        low, high = ax.get_ylim()
+        plt.arrow(left, 0, right - left, 0, length_includes_head=True, head_width=0.15)
+        plt.arrow(0, low, 0, high - low, length_includes_head=True, head_width=0.15)
+
+        # Firkanter :D !!!
+        plt.grid(True)
+
+        ix = np.linspace(functions[5], functions[6])
+        iy = functions[0](ix)
+        verts = [(functions[5], 0), *zip(ix, iy), (functions[6], 0)]
+        poly = plt.Polygon(verts, facecolor="0.9", edgecolor="0.5")
+        ax1.add_patch(poly)
+
+        t1 = np.arange(-10.0, 10.0, 0.1)
+        plt.plot(t1, functions[0](t1))
+
+        plt.show()
+
+    def plotDiffFunc(self):
+        # Idk
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+
+        ax1 = fig.add_subplot()
+
+        # Lim som er fra og til i x og y akserne
+        plt.xlim((-10, 10))
+        plt.ylim((-10, 10))
+
+        # Hvad x og y akserne hedder
+        plt.ylabel("$y$")
+        plt.xlabel("$x$")
+
+        # x og y akse i midten af koordinatsystemet
+        left, right = ax.get_xlim()
+        low, high = ax.get_ylim()
+        plt.arrow(left, 0, right - left, 0, length_includes_head=True, head_width=0.15)
+        plt.arrow(0, low, 0, high - low, length_includes_head=True, head_width=0.15)
+
+        # Firkanter :D !!!
+        plt.grid(True)
+
+        t1 = np.arange(-10.0, 10.0, 0.1)
+        plt.plot(t1, functions[1](t1))
+        plt.show()
+
+    def fysikPlot(self):
         pass
-
 
 class window0:
     def __init__(self, height, width, entry, label):
