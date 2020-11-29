@@ -488,7 +488,7 @@ class window0:
                     a_label = tk.Label(master=root, text="x^3")
                     b_entry = tk.Entry(master=root)
                     b_label = tk.Label(master=root, text="x^2")
-                    c_ent = tk.Entry(master=root)
+                    c_entry = tk.Entry(master=root)
                     c_label = tk.Label(master=root, text="x")
                     d_entry = tk.Entry(master=root)
 
@@ -559,7 +559,7 @@ class window0:
                     e_label = tk.Label(master=root, text="x^2")
                     f_entry = tk.Entry(master=root)
                     f_label = tk.Label(master=root, text="x")
-                    g_entry = tk.Entry(window)
+                    g_entry = tk.Entry(master=root)
 
                     a_entry.grid(column=0, row=2, sticky=tk.E)
                     a_label.grid(column=1, row=2, sticky=tk.W)
