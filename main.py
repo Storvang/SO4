@@ -6,10 +6,11 @@ import matplotlib.pyplot as plt
 from tkinter import *
 from PIL import ImageTk, Image
 
-
+#Sympoler vu gerne ville bruge
 x, y, z, m, t = symbols("x y z m t")
 
 init_printing(use_unicode=False, wrap_line=False)
+
 class fysik:
     def __init__(self, function, til, fra):
         self.function = function
@@ -17,10 +18,13 @@ class fysik:
         self.til = til
 
     def getVfunc(self):
+        #Vi differentiere s(t)
         return lambdify(t, str(diff(self.function)))
 
     def streakning(self):
+        #Vi "finder" stam funktion til v(t)
         s1 = lambdify(t, self.function)
+        #Vi bruge stan funktion til at finde den tilbagelagte strækning
         return s1(self.fra) - s1(self.til)
 
 class calculus:
@@ -31,42 +35,37 @@ class calculus:
         self.tangentPunkt = tangentPunkt
 
     def function(self):
-
+        #Vi definere funktion
         f = lambdify(x, self.funktion)
-
+        #Vi diferentiere funktion
         diffX = self.diffrantialregning(self.funktion)
-
-        #print(diffX)
-
+        #Vi finder funktion til tangenten
         tf = self.tangentFunction(f, diffX)
+        #Vi finder stam funktion
         intX = self.intergralregning(self.funktion)
-
+        #Vi finder areal under kurven ved hjælp af stamfunktionen
         areal = intX(float(self.slut)) - intX(float(self.start))
-
+        #Vi retunere funktion, diferentierde funktion, stamfunktion, areal under kruven, startspunkt og slutpunkt.
         return [f, diffX, tf, intX, areal, self.start, self.slut]
 
-    #[f, diffX, tf, intX, areal, self.start, self.slut]
-
     def diffrantialregning(self, f):
+        #Der diferentieres funktiomn
         return lambdify(x, str(diff(f)))
 
     def tangentFunction(self, f, diffX):
-
+        #Der findes hældning
         healdning = diffX(self.tangentPunkt)
-
-        #print(healdning)
-
+        #Vi laver et udtryk 0 = ax + b - y
         expr = healdning*self.tangentPunkt + m - f(self.tangentPunkt)
-
+        #Vi løser for b
         b1 = solve(expr, m)
-
-        #print(b1)
-
+        #Vi laver funktion til tangenten
         tf = lambdify(x, str(healdning*x + b1[0]))
-
+        #Der retuneres funktionen
         return tf
 
     def intergralregning(self, f):
+        #Der bliver fundet stamfunktion
         return lambdify(x, str(integrate(f, x)))
 
 class plot:
