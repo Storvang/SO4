@@ -1,3 +1,4 @@
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from sympy import *
 import tkinter as tk
 import numpy as np
@@ -6,7 +7,7 @@ from tkinter import *
 from PIL import ImageTk, Image
 
 
-x, y, z, m = symbols("x y z m")
+x, y, z, m, t = symbols("x y z m t")
 
 init_printing(use_unicode=False, wrap_line=False)
 class fysik:
@@ -170,7 +171,10 @@ class plot:
         plt.plot(t1, functions[1](t1))
         plt.show()
 
-    def fysikPlot(self):
+    def fysikPlot0(self):
+        pass
+
+    def fysikPlot1(self):
         pass
 
 class window0:
@@ -203,8 +207,6 @@ class window0:
                 veardier = calc.function()
                 plotting = plot(veardier)
                 plotting.plotDiff()
-
-
 
             btn1 = tk.Button(
                 window,
@@ -241,7 +243,7 @@ class window0:
 
             frame2_label = tk.Label(frame_1, text="Graf/frame 2")
 
-            def getVal():
+            def beregn():
                 start = aval.get()
                 slut = bval.get()
                 calc = calculus(funktion, start, slut, 0)
@@ -258,7 +260,7 @@ class window0:
             b_value = tk.Entry(window1, textvariable=bval)
             btn1 = tk.Button(
                 window1,
-                command=lambda: [getVal()],
+                command=lambda: [beregn()],
                 text="beregn"
             )
 
@@ -293,18 +295,9 @@ class window0:
 
             frame2_label = tk.Label(frame_1, text="Graf/frame 2")
 
-            funktion_label = tk.Label(window2, text="vælg funktion:")
-            a_value_label = tk.Label(window2, text="Intast:")
 
-            Hjem= tk.Button(window2, text="hjem", command=lambda: [window2.destroy(), drawmenu()])
             tekst = tk.Label(window2, text="Thorbjørns hygge program")
 
-            a_value = tk.Entry(window2)
-
-            btn1 = tk.Button(
-                window2,
-                text="beregn"
-            )
 
             quit_btn = tk.Button(
                 window2,
@@ -314,14 +307,20 @@ class window0:
 
             variable = tk.StringVar(window2)
             variable.set("vælg funktion")
+            forklaring_label = Label(text="Vi har givet en funktion: s(t) = 2(m/s^3)*t**3.\n Vil ville gerne finde ud af hvad"
+                                          "hastigheden er i et punkt og det gør vi ved at differentiere udtrykke dvs...\n"
+                                          "s'(t) = v(t)\n"
+                                          "Det vil sige at v(t) = 6(m/s^3)*t**2\n"
+                                          "Så det vi kan gøre er at tage integrallet af dette udtryk for at finde ud af\n"
+                                          "Hvor lang et objekt har bevæget sig vi har valgt at gøre det fra 0 til 3 sekunder"
+                                          "Først har vi den originale graf:")
 
+            funktion = str(2*t**3)
+            Fysik = fysik(funktion, 0, 3)
+
+            forklaring_label.grid(column=2, row=1)
             tekst.grid(column=1, row=0)
-            funktion_box.grid(column=1, row=1)
-            Hjem.grid(column=1, row=0)
-            a_value.grid(column=1, row=2)
-            btn1.grid(column=1, row=4)
-            quit_btn.grid(column=0, row=4))
-            a_value_label.grid(column=0, row=2)
+            quit_btn.grid(column=0, row=4)
 
 
             frame2_label.grid()
