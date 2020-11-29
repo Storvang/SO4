@@ -614,13 +614,17 @@ class window0:
                 else:
                     pass
 
+
             variable = tk.StringVar(root)
             variable.set("vælg funktion")
             # print(variable)
             funktionbox = tk.OptionMenu(root, variable, *self.funktioner)
-            funktionbox.grid()
+            funktionbox.grid(column=3, row=2)
             btn= tk.Button(root, text='vælg', command= lambda: [check1(variable.get())])
-            btn.grid()
+            btn.grid(column=3, row=3)
+            # add empty label in row 0 and column 0
+            l0 = tk.Label(root, bg='white', text='                                                                                                                                                                                           ')
+            l0.grid(column=2, row=2)
             #btn = tk.Button(root, anchor='w', activebackground="#33B5E5", text="vælg",
                       #      command=lambda: [check1(variable.get())])
             #btn_window = canvas.create_window(570, 234.5, anchor='nw', window=btn)
