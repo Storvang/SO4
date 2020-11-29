@@ -415,49 +415,52 @@ class window0:
             window2.mainloop()
 
         def drawmenu():
-            FILENAME = 'Test2.png'
-            root = tk.Tk()
-            root.geometry("1222x569")
-            root.configure(bg="white")
-            canvas = tk.Canvas(root, width=2500, height=3000)
-            canvas.place(x=0, y=0)
+            FILENAME = 'Test2.png'#Der bliver skabt varible for billede
+            root = tk.Tk() #Vinduet bliver lavet
+            root.geometry("1222x569") #Vindue størelse bliver bestem
+            root.configure(bg="white") #Vindue bagrunds favre bliver sat til hvid
+            canvas = tk.Canvas(root, width=2500, height=3000) #Canvas bliver skabt: root=master.
+            canvas.place(x=0, y=0) #Canvas bliver placeret med overste venstre jorden i punktet 0,0
 
             funktion = StringVar()
 
-            btn = tk.Entry(root, textvariable=funktion, bg="gray")
+            btn = tk.Entry(root, textvariable=funktion, bg="gray") #Entry til funktion
             btn.grid(column=3, row=3)
 
-            tk_img = ImageTk.PhotoImage(file=FILENAME)
-            canvas.create_image(611, 284.5, image=tk_img)
+            tk_img = ImageTk.PhotoImage(file=FILENAME) #Ny variable der er med til at gøre at vindue kan komme på canvas
+            canvas.create_image(611, 284.5, image=tk_img) #Billede bliver sat på canvaset
+
+            #Knappen for at åbne differential regnings vindue.
             quit_button = tk.Button(root, text="Differentialregning", anchor='w',
                                     command=lambda: [root.destroy(), differentialregning(funktion.get())],
                                     activebackground="#33B5E5")
+            #Knappen bliver sat på billedet(Test2.png)
             quit_button_window = canvas.create_window(570, 84.5, anchor='nw', window=quit_button)
 
+            #Knappen for at åbne Intergral regnings vinduet
             button = tk.Button(root, text="   Integralregning   ", anchor='w',
                                activebackground="#33B5E5", command=lambda: [root.destroy(), integralregning(funktion.get())])
+            #Knappen bliver sat på billedet(Test2.png)
             button_window = canvas.create_window(570, 134.5, anchor='nw', window=button)
 
+            #Knappen for at åbne Thorbjørnsygge
             button1 = tk.Button(root, text=" Thorbjørns_hygge ", anchor='w',
                                 activebackground="#33B5E5", command=lambda: [root.destroy(), thorbjørns_hygge()])
+            #Knappen bliver sat på billedet(Test2.png)
             button1_window = canvas.create_window(570, 184.5, anchor='nw', window=button1)
 
-            # frame = tk.Frame(window, bg="white")
 
 
 
-            # print(variable)
+            #Label der visser hvor funktion entry er
             skriv = tk.Label(root, text="Funktion:")
             skriv.grid(column=2, row=3)
+
+            #Label der sørger for at entry og overstående label er i midten af menu
             fill = tk.Label(root, bg="white", text="                                                                                                                                                                                 ")
             fill.grid(column=0, row=0)
 
-            # add empty label in row 0 and column 0
-           # l0 = tk.Label(root, bg='white', text='                                                                                                                                                                                            ')
-            #l0.grid(column=2, row=2)
-            #btn = tk.Button(root, anchor='w', activebackground="#33B5E5", text="vælg",
-                      #      command=lambda: [check1(variable.get())])
-            #btn_window = canvas.create_window(570, 234.5, anchor='nw', window=btn)
+
 
             root.mainloop()
 
