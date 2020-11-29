@@ -9,161 +9,41 @@ from PIL import ImageTk, Image
 x, y, z, m = symbols("x y z m")
 
 init_printing(use_unicode=False, wrap_line=False)
+class fysik:
+    def __init__(self, function, til, fra):
+        self.function = function
+        self.fra = fra
+        self.til = til
+
+    def getVfunc(self):
+        return lambdify(t, str(diff(self.function)))
+
+    def streakning(self):
+        s1 = lambdify(t, self.function)
+        return s1(self.fra) - s1(self.til)
 
 class calculus:
-    def __init__(self, a, b, c, d, e, f, g, start, slut, tangentPunkt, typeFunc):
-        self.a = a
-        self.b = b
-        self.c = c
-        self.d = d
-        self.e = e
-        self.f = f
-        self.g = g
+    def __init__(self, funktion, start, slut, tangentPunkt):
+        self.funktion = funktion
         self.start = start
         self.slut = slut
         self.tangentPunkt = tangentPunkt
-        self.typeFunc = typeFunc
 
-    def function(self, antal):
-        #1 grads
-        if antal == 1:
-            function = str(self.a*x + self.b)
-            f = lambdify(x, function)
-            diffX = self.diffrantialregning(function)
+    def function(self):
 
-            #print(diffX)
+        f = lambdify(x, self.funktion)
 
-            tf = self.tangentFunction(f, diffX)
-            intX = self.intergralregning(function)
+        diffX = self.diffrantialregning(self.funktion)
 
-            areal = intX(self.slut) - intX(self.start)
+        #print(diffX)
 
-            return [f, diffX, tf, intX, areal]
-        #2 grads
-        elif antal == 2:
-            function = str(self.a*(x**2) + self.b*x + self.c)
-            f = lambdify(x, function)
-            diffX = self.diffrantialregning(function)
+        tf = self.tangentFunction(f, diffX)
+        intX = self.intergralregning(self.funktion)
 
-            #print(diffX)
+        areal = intX(float(self.slut)) - intX(float(self.start))
 
-            tf = self.tangentFunction(f, diffX)
-            intX = self.intergralregning(function)
+        return [f, diffX, tf, intX, areal, self.start, self.slut]
 
-            areal = intX(self.slut) - intX(self.start)
-            return [f, diffX, tf, intX, areal]
-
-        #3 grads
-        elif antal == 3:
-            function = str(self.a*(x**3) + self.b*(x**2) + self.c*x + self.d)
-            f = lambdify(x, function)
-            diffX = self.diffrantialregning(function)
-
-            #print(diffX)
-
-            tf = self.tangentFunction(f, diffX)
-            intX = self.intergralregning(function)
-
-            areal = intX(self.slut) - intX(self.start)
-            return [f, diffX, tf, intX, areal]
-
-        #4 grads
-        elif antal == 4:
-            function = str(self.a*(x**4) + self.b*(x**3) + self.c*(x**2) + self.d*x + self.e)
-            f = lambdify(x, function)
-            diffX = self.diffrantialregning(function)
-
-            #print(diffX)
-
-            tf = self.tangentFunction(f, diffX)
-            intX = self.intergralregning(function)
-
-            areal = intX(self.slut) - intX(self.start)
-            return [f, diffX, tf, intX, areal]
-
-        #5 grads
-        elif antal == 5:
-            function = str(self.a*(x**5) + self.b*(x**4) + self.c*(x**3) + self.d*(x**2) + self.e*x + self.f)
-            f = lambdify(x, function)
-            diffX = self.diffrantialregning(function)
-
-            #print(diffX)
-
-            tf = self.tangentFunction(f, diffX)
-            intX = self.intergralregning(function)
-
-            areal = intX(self.slut) - intX(self.start)
-            return [f, diffX, tf, intX, areal]
-
-        #6 grads
-        elif antal == 6:
-            function = str(self.a*(x**6) + self.b*(x**5) + self.c*(x**4) + self.d*(x**3) + self.e*(x**2) + self.f*x + self.g)
-            f = lambdify(x, function)
-            diffX = self.diffrantialregning(function)
-
-            #print(diffX)
-
-            tf = self.tangentFunction(f, diffX)
-            intX = self.intergralregning(function)
-
-            areal = intX(self.slut) - intX(self.start)
-            return [f, diffX, tf, intX, areal]
-
-        #cos
-        elif antal == 7:
-            function = str(cos(self.a*x))
-            f = lambdify(x, function)
-            diffX = self.diffrantialregning(function)
-
-            #print(diffX)
-
-            tf = self.tangentFunction(f, diffX)
-            intX = self.intergralregning(function)
-
-            areal = intX(self.slut) - intX(self.start)
-            return [f, diffX, tf, intX, areal]
-
-        #sin
-        elif antal == 8:
-            function = str(sin(self.a*x))
-            f = lambdify(x, function)
-            diffX = self.diffrantialregning(function)
-
-            #print(diffX)
-
-            tf = self.tangentFunction(f, diffX)
-            intX = self.intergralregning(function)
-
-            areal = intX(self.slut) - intX(self.start)
-            return [f, diffX, tf, intX, areal]
-
-        #tan
-        elif antal == 9:
-            function = str(tan(self.a*x))
-            f = lambdify(x, function)
-            diffX = self.diffrantialregning(function)
-
-            #print(diffX)
-
-            tf = self.tangentFunction(f, diffX)
-            intX = self.intergralregning(function)
-
-            areal = intX(self.slut) - intX(self.start)
-            return [f, diffX, tf, intX, areal]
-
-        #potens
-        elif antal == 10:
-            function = str(self.b*self.a**x)
-            f = lambdify(x, function)
-            diffX = self.diffrantialregning(function)
-
-            #print(diffX)
-
-            tf = self.tangentFunction(f, diffX)
-            intX = self.intergralregning(function)
-
-            areal = intX(self.slut) - intX(self.start)
-            return [f, diffX, tf, intX, areal]
     #[f, diffX, tf, intX, areal, self.start, self.slut]
 
     def diffrantialregning(self, f):
@@ -218,8 +98,8 @@ class plot:
         plt.grid(True)
 
         t1 = np.arange(-10.0, 10.0, 0.1)
-        plt.plot(t1, functions[0](t1))
-        plt.plot(t1, functions[2](t1))
+        plt.plot(t1, self.functions[0](t1))
+        plt.plot(t1, self.functions[2](t1))
         plt.show()
 
     def plotInt(self):
@@ -247,14 +127,18 @@ class plot:
         # Firkanter :D !!!
         plt.grid(True)
 
-        ix = np.linspace(functions[5], functions[6])
-        iy = functions[0](ix)
-        verts = [(functions[5], 0), *zip(ix, iy), (functions[6], 0)]
+        ix = np.linspace(float(self.functions[5]), float(self.functions[6]))
+        iy = self.functions[0](ix)
+        verts = [(self.functions[5], 0), *zip(ix, iy), (self.functions[6], 0)]
         poly = plt.Polygon(verts, facecolor="0.9", edgecolor="0.5")
         ax1.add_patch(poly)
 
+        ax.set_xticks((float(self.functions[5]), float(self.functions[6])))
+        ax.set_xticklabels((f"{float(self.functions[5])}", f"{float(self.functions[6])}"))
+        ax.set_yticks([])
+
         t1 = np.arange(-10.0, 10.0, 0.1)
-        plt.plot(t1, functions[0](t1))
+        plt.plot(t1, self.functions[0](t1))
 
         plt.show()
 
@@ -298,7 +182,7 @@ class window0:
         self.funktioner = ["1 grads", "2 grads", "3 grads", "4 grads", "5 grads", "6 grads", "sinus", "cosinus", "tangent", "potens"]
 
     def drawWindow(self):
-        def differentialregning():
+        def differentialregning(funktion):
             window = tk.Tk()
             window.title("SO4")
 
@@ -306,13 +190,25 @@ class window0:
 
             frame2_label = tk.Label(frame_1, text="Graf/frame 2")
 
+            xval = StringVar()
+
             funktion_label = tk.Label(window, text="vælg funktion:")
             x_value_label = tk.Label(window, text="Intast x værdi:")
             tekst = tk.Label(window, text="differentialregning")
-            x_value = tk.Entry(window)
+            x_value = tk.Entry(window, textvariable=xval)
+
+            def beregn():
+                x = xval.get()
+                calc = calculus(funktion, 0, 0, int(x))
+                veardier = calc.function()
+                plotting = plot(veardier)
+                plotting.plotDiff()
+
+
 
             btn1 = tk.Button(
                 window,
+                command=lambda: [beregn()],
                 text="beregn"
                 )
 
@@ -321,11 +217,6 @@ class window0:
                 command=lambda: [window.destroy(), drawmenu()],
                 text="menu"
             )
-
-
-
-
-
 
             tekst.grid(column=1, row=0)
             x_value.grid(column=1, row=100)
@@ -339,22 +230,35 @@ class window0:
 
             window.mainloop()
 
-        def integralregning():
+        def integralregning(funktion):
             window1 = tk.Tk()
             window1.title("SO4")
+
+            aval = StringVar()
+            bval = StringVar()
 
             frame_1 = tk.Frame(window1, height=300, width=300)
 
             frame2_label = tk.Label(frame_1, text="Graf/frame 2")
 
-            funktion_label = tk.Label(window1, text="vælg funktion:")
+            def getVal():
+                start = aval.get()
+                slut = bval.get()
+                calc = calculus(funktion, start, slut, 0)
+                veadier = calc.function()
+                print(veadier)
+                plotting = plot(veadier)
+                plotting.plotInt()
+
+
             a_value_label = tk.Label(window1, text="Intast a:")
             b_value_label = tk.Label(window1, text="Intast b:")
             tekst = tk.Label(window1, text="integralregning")
-            a_value = tk.Entry(window1)
-            b_value = tk.Entry(window1)
+            a_value = tk.Entry(window1, textvariable=aval)
+            b_value = tk.Entry(window1, textvariable=bval)
             btn1 = tk.Button(
                 window1,
+                command=lambda: [getVal()],
                 text="beregn"
             )
 
@@ -366,18 +270,14 @@ class window0:
 
             variable = tk.StringVar(window1)
             variable.set("vælg funktion")
-            funktion_box = tk.OptionMenu(window1, variable, *self.funktioner)
 
             tekst.grid(column=1, row=0)
-            funktion_box.grid(column=1, row=1)
             a_value.grid(column=1, row=2)
             b_value.grid(column=1, row=3)
             btn1.grid(column=1, row=4)
             quit_btn.grid(column=0, row=4)
-            funktion_label.grid(column=0, row=1)
             a_value_label.grid(column=0, row=2)
             b_value_label.grid(column=0, row=3)
-
             frame2_label.grid()
             frame_1.grid(column=2, row=0, rowspan=4)
 
@@ -388,10 +288,6 @@ class window0:
 
             window2 = tk.Tk()
             window2.title("SO4")
-
-            def hjem():
-                window2.destroy()
-                window0()
 
             frame_1 = tk.Frame(window2, height=300, width=300)
 
@@ -418,15 +314,13 @@ class window0:
 
             variable = tk.StringVar(window2)
             variable.set("vælg funktion")
-            funktion_box = tk.OptionMenu(window2, variable, *self.funktioner)
 
             tekst.grid(column=1, row=0)
             funktion_box.grid(column=1, row=1)
             Hjem.grid(column=1, row=0)
             a_value.grid(column=1, row=2)
             btn1.grid(column=1, row=4)
-            quit_btn.grid(column=0, row=4)
-            funktion_label.grid(column=0, row=1)
+            quit_btn.grid(column=0, row=4))
             a_value_label.grid(column=0, row=2)
 
 
@@ -442,15 +336,21 @@ class window0:
             root.configure(bg="white")
             canvas = tk.Canvas(root, width=2500, height=3000)
             canvas.place(x=0, y=0)
+
+            funktion = StringVar()
+
+            btn = tk.Entry(root, textvariable=funktion, bg="gray")
+            btn.grid(column=3, row=3)
+
             tk_img = ImageTk.PhotoImage(file=FILENAME)
             canvas.create_image(611, 284.5, image=tk_img)
             quit_button = tk.Button(root, text="Differentialregning", anchor='w',
-                                    command=lambda: [root.destroy(), differentialregning()],
+                                    command=lambda: [root.destroy(), differentialregning(funktion.get())],
                                     activebackground="#33B5E5")
             quit_button_window = canvas.create_window(570, 84.5, anchor='nw', window=quit_button)
 
             button = tk.Button(root, text="   Integralregning   ", anchor='w',
-                               activebackground="#33B5E5", command=lambda: [root.destroy(), integralregning()])
+                               activebackground="#33B5E5", command=lambda: [root.destroy(), integralregning(funktion.get())])
             button_window = canvas.create_window(570, 134.5, anchor='nw', window=button)
 
             button1 = tk.Button(root, text=" Thorbjørns_hygge ", anchor='w',
@@ -462,12 +362,10 @@ class window0:
 
 
             # print(variable)
-            skriv=tk.Label(root, text="Funktion:")
+            skriv = tk.Label(root, text="Funktion:")
             skriv.grid(column=2, row=3)
-            fill=tk.Label(root, bg="white", text="                                                                                                                                                                                 ")
+            fill = tk.Label(root, bg="white", text="                                                                                                                                                                                 ")
             fill.grid(column=0, row=0)
-            btn= tk.Entry(root, bg="gray", fg="white")
-            btn.grid(column=3, row=3)
 
             # add empty label in row 0 and column 0
            # l0 = tk.Label(root, bg='white', text='                                                                                                                                                                                            ')
@@ -485,33 +383,3 @@ class window0:
 
 window = window0(500, 500, 0, 0)
 window.drawWindow()
-
-#Kommer ind i gui:
-antal = int(input("Hvor mange kompunenter er det i funktion: "))
-
-if antal == 1:
-    a = int(input("Hvad er a værdien: "))
-    b = int(input("Hvad er b værdien: "))
-    start = float(input("Hvor skal integralet starte: "))
-    slut = float(input("Hvor skal integralet slut: "))
-    tangentPunkt = int(input("Hvor skal tangenten være: "))
-    calc = calculus(a, b, 0, 0, 0, start, slut, tangentPunkt)
-    functions = calc.function(antal)
-    plot = plot(functions)
-    plot.setup()
-
-    #print(functions)
-
-elif antal == 2:
-    a = int(input("Hvad er a værdien: "))
-    b = int(input("Hvad er b værdien: "))
-    c = int(input("Hvad er c værdien: "))
-    start = float(input("Hvor skal integralet starte: "))
-    slut = float(input("Hvor skal integralet slut: "))
-    tangentPunkt = int(input("Hvor skal tangenten være: "))
-    calc = calculus(a, b, c, 0, 0, start, slut, tangentPunkt)
-    functions = calc.function(antal)
-    plot = plot(functions)
-    plot.setup()
-
-
