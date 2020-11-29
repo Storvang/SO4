@@ -172,10 +172,65 @@ class plot:
         plt.show()
 
     def fysikPlot0(self):
-        pass
+        #[s, fra, til, v, areal]
+        #Differential
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+
+        # Lim som er fra og til i x og y akserne
+        plt.xlim((-10, 10))
+        plt.ylim((-10, 10))
+
+        # Hvad x og y akserne hedder
+        plt.ylabel("$s / m$")
+        plt.xlabel("$t / s$")
+
+        # x og y akse i midten af koordinatsystemet
+        left, right = ax.get_xlim()
+        low, high = ax.get_ylim()
+        plt.arrow(left, 0, right - left, 0, length_includes_head=True, head_width=0.15)
+        plt.arrow(0, low, 0, high - low, length_includes_head=True, head_width=0.15)
+
+        # Firkanter :D !!!
+        plt.grid(True)
+
+        t1 = np.arange(-10.0, 10.0, 0.1)
+        plt.plot(t1, self.functions[0](t1))
+        plt.show()
 
     def fysikPlot1(self):
-        pass
+        # [s, fra, til, v, areal]
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+
+        ax1 = fig.add_subplot()
+
+        # Lim som er fra og til i x og y akserne
+        plt.xlim((-10, 10))
+        plt.ylim((-40, 40))
+
+        # Hvad x og y akserne hedder
+        plt.ylabel("$v/(m/s)$")
+        plt.xlabel("$t/ s$")
+
+        # x og y akse i midten af koordinatsystemet
+        left, right = ax.get_xlim()
+        low, high = ax.get_ylim()
+        plt.arrow(left, 0, right - left, 0, length_includes_head=True, head_width=0.15)
+        plt.arrow(0, low, 0, high - low, length_includes_head=True, head_width=0.15)
+
+        # Firkanter :D !!!
+        plt.grid(True)
+        ix = np.linspace(self.functions[1], self.functions[2])
+        iy = self.functions[3](ix)
+        verts = [(self.functions[1], 0), *zip(ix, iy), (self.functions[2], 0)]
+        poly = plt.Polygon(verts, facecolor="0.9", edgecolor="0.5")
+        ax1.add_patch(poly)
+
+        t1 = np.arange(-10.0, 10.0, 0.1)
+        plt.plot(t1, self.functions[3](t1))
+
+        plt.show()
 
 class window0:
     def __init__(self, height, width, entry, label):
@@ -313,11 +368,43 @@ class window0:
                                           "Det vil sige at v(t) = 6(m/s^3)*t**2\n"
                                           "Så det vi kan gøre er at tage integrallet af dette udtryk for at finde ud af\n"
                                           "Hvor lang et objekt har bevæget sig vi har valgt at gøre det fra 0 til 3 sekunder"
-                                          "Først har vi den originale graf:")
+                                          "Først har vi den originale graf"
+                                          "Den anden graf er graf for den anden funktion")
 
-            funktion = str(2*t**3)
-            Fysik = fysik(funktion, 0, 3)
+            def beregn():
+                #2(m/s^3)*t^3
+                funktion = str(2*t**3)
+                start = 0
+                slut = 3
+                Fysik = fysik(funktion, start, slut)
+                s = lambdify(t, funktion)
+                v = Fysik.getVfunc()
+                areal = Fysik.streakning()
+                # [s, fra, til, v, areal]
+                plotting = plot([s, start, slut, v, areal])
+                plotting.fysikPlot0()
 
+            def beregn1():
+                #2(m/s^3)*t^3
+                funktion = str(2*t**3)
+                start = 0
+                slut = 3
+                Fysik = fysik(funktion, start, slut)
+                s = lambdify(t, funktion)
+                v = Fysik.getVfunc()
+                areal = Fysik.streakning()
+                areal_label = Label(window2, text=f"Et objekt har bevæget sig {areal} m")
+                areal_label.grid(column=2, row=4)
+                # [s, fra, til, v, areal]
+                plotting = plot([s, start, slut, v, areal])
+                plotting.fysikPlot1()
+
+
+            bereng_knap = Button(window2, text="Vis graf 1", command=lambda: [beregn()])
+            bereng_knap1 = Button(window2, text="Vis graf 2", command=lambda: [beregn1()])
+
+            bereng_knap.grid(column=2, row=2)
+            bereng_knap1.grid(column=2, row=3)
             forklaring_label.grid(column=2, row=1)
             tekst.grid(column=1, row=0)
             quit_btn.grid(column=0, row=4)
